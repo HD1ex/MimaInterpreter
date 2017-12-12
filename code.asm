@@ -1,0 +1,3 @@
+LDC 42
+STV X
+HALT
