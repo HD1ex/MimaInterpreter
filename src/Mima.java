@@ -4,6 +4,6 @@ public class Mima
 {
     public void execute(List<Instruction> instructions)
     {
-        
+        int i;
     }
 }
