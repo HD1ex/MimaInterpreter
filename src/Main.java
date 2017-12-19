@@ -11,14 +11,14 @@ public class Main
     {
         if (args.length == 0)
         {
-            System.out.println("Missing file argument. Usage: mima [filename]");
+            System.err.println("Missing file argument. Usage: mima [filename]");
             return;
         }
         Path filePath = Paths.get(args[0]);
 
         if (!Files.exists(filePath))
         {
-            System.out.println("File doesn't exist");
+            System.err.println("File doesn't exist!");
             return;
         }
 
@@ -28,7 +28,11 @@ public class Main
             file = Files.readAllLines(filePath);
             List<Instruction> instructions = readCodeFile(file);
 
-            int i = 0;
+            Mima mima = new Mima();
+
+            mima.execute(instructions);
+
+            mima.printState();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -48,7 +52,8 @@ public class Main
             Instruction instruction = new Instruction();
 
             if (columns.length == 0)
-                throw new Exception("Empty line " + ++i);
+                continue;
+                //throw new Exception("Empty line " + ++i);
             instruction.setName(columns[0]);
 
             if (columns.length > 1)
